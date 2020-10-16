@@ -10,8 +10,10 @@ const errorHandler: ErrorRequestHandler = (error, request, response, next) => {
     let errors: ValidationErrors = {};
 
     error.inner.forEach(err => {
-      errors[err.path] = err.erros;
-    })
+      errors[err.path] = err.errors;
+    });
+
+    return response.status(400).json({ message: 'Validation fails', errors})
   }
   console.log(error);
 
